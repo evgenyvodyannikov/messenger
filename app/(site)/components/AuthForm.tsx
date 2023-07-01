@@ -11,10 +11,15 @@ import { signIn } from 'next-auth/react';
 import Input from "@/app/components/inputs/Input";
 import Button from "@/app/components/Button";
 import AuthSocialButton from "./AuthSocialButton";
+import resources from "@/app/languages/resources";
 
 type Variant = 'LOGIN' | 'REGISTER';
 
-const AuthForm = () => {
+interface AuthFormProps {
+    lang: string;
+}
+
+const AuthForm: React.FC<AuthFormProps> = ({lang}) => {
 
     const [variant, setVariant] = useState<Variant>('LOGIN');
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -110,7 +115,7 @@ const AuthForm = () => {
                     {variant === 'REGISTER' && (
                         <Input 
                             id="name" 
-                            label="Name" 
+                            label={resources[lang].name}
                             register={register}
                             errors={errors}
                             required
@@ -120,7 +125,7 @@ const AuthForm = () => {
 
                     <Input 
                         id="email" 
-                        label="Email address"
+                        label={resources[lang].email}
                         type="email"
                         register={register}
                         errors={errors}
@@ -130,7 +135,7 @@ const AuthForm = () => {
 
                     <Input 
                         id="password" 
-                        label="Password"
+                        label={resources[lang].password}
                         type="password"
                         register={register}
                         errors={errors}
@@ -143,7 +148,7 @@ const AuthForm = () => {
                         fullWidth
                         type='submit'
                     >
-                        {variant === 'LOGIN' ? 'Sign in' : 'Register'}
+                        {variant === 'LOGIN' ? resources[lang].loginButton : resources[lang].registerButton }
                     </Button>    
                 </form>
 
@@ -161,7 +166,7 @@ const AuthForm = () => {
                         </div>
                         <div className="relative flex justify-center text-sm">
                             <span className="bg-white px-2 text-gray-500">
-                                Or continue with 
+                                { resources[lang].socialLinks }
                             </span>
                         </div>
                     </div>
@@ -194,13 +199,13 @@ const AuthForm = () => {
                     "
                 >
                     <div>
-                        {variant === 'LOGIN' ? 'New to messenger?' : 'Already have an account?'}
+                        {variant === 'LOGIN' ? resources[lang].registerStateMessage : resources[lang].loginStateMessage }
                     </div>
                     <div
                         onClick={toggleVariant}
                         className="underline cursor-pointer"
                     >
-                        {variant === 'LOGIN' ? 'Create an account': 'Login'}
+                        {variant === 'LOGIN' ? resources[lang].registerStateAction : resources[lang].loginStateAction }
                     </div>
                 </div>
 

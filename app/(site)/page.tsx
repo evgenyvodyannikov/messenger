@@ -1,7 +1,18 @@
+'use client';
+
 import Image from "next/image"
 import AuthForm from './components/AuthForm'
+import { useState } from "react";
+
+import resources from "../languages/resources";
+import LanguageSwitcher from "../components/LanguageSwitcher";
+
+type Language = 'EN' | 'RU';
 
 export default function Home() {
+
+    const [language, setLanguage] = useState<Language>('RU');
+
     return (
         <div
             className="
@@ -35,10 +46,13 @@ export default function Home() {
                     text-gray-900
                 "
             >
-                Sign in to your account
+                {resources[language].welcomeLoginMessage}
             </h2>
+
+
         
-            <AuthForm/>
+            <AuthForm lang={language}/>
+            <LanguageSwitcher handleSwitch={setLanguage}/>
 
         </div>
     )

@@ -84,6 +84,7 @@ const AuthForm = () => {
                             register={register}
                             errors={errors}
                             required
+                            disabled={isLoading}
                         />
                     )}
 
@@ -94,6 +95,7 @@ const AuthForm = () => {
                         register={register}
                         errors={errors}
                         required
+                        disabled={isLoading}
                     />
 
                     <Input 
@@ -103,6 +105,7 @@ const AuthForm = () => {
                         register={register}
                         errors={errors}
                         required
+                        disabled={isLoading}
                     />
 
                     <Button
